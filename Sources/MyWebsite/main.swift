@@ -14,14 +14,14 @@ struct MyWebsite: Website {
     }
 
     // Update these properties to configure your website:
-    var url = URL(string: "https://your-website-url.com")!
-    var name = "MyWebsite"
-    var description = "A description of MyWebsite"
+    var url = URL(string: "https://m1zz.github.io/")!
+    var name = "Leeo's Dev Daily"
+    var description = "Storage of apple platform knowledge."
     var language: Language { .english }
     var imagePath: Path? { nil }
 }
 
 // This will generate your website using the built-in Foundation theme:
 try MyWebsite()
-    .publish(using: [.deploy(using: .gitHub("M1zz/SwiftBlog")),
+    .publish(using: [.deploy(using: .gitHub("M1zz/m1zz.github.io")),
                      .generateHTML(withTheme: .foundation)])
