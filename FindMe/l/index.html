@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FindMe - 위치 확인</title>
+  <meta name="apple-itunes-app" content="app-clip-bundle-id=com.leeo.FindMe.Clip">
+  <style>
+    body{font-family:-apple-system,sans-serif;text-align:center;padding:40px 20px;background:#f5f5f5}
+    .card{background:#fff;border-radius:16px;padding:30px;max-width:400px;margin:0 auto;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+    h1{font-size:24px} .btn{display:inline-block;padding:12px 24px;background:#007AFF;color:#fff;border-radius:10px;text-decoration:none;margin:8px}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>📍 FindMe</h1>
+    <p>위치를 확인하려면 iPhone에서 열어주세요</p>
+    <p id="info"></p>
+    <a class="btn" id="maps" href="#">Apple Maps에서 열기</a>
+  </div>
+  <script>
+    const p=new URLSearchParams(location.search);
+    const lat=p.get('lat'),lng=p.get('lng'),name=p.get('name')||'위치';
+    if(lat&&lng){
+      document.getElementById('info').textContent=name+(p.get('memo')?' - '+p.get('memo'):'');
+      document.getElementById('maps').href='https://maps.apple.com/?ll='+lat+','+lng+'&q='+encodeURIComponent(name);
+    }
+  </script>
+</body>
+</html>
