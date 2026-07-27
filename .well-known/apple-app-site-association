@@ -1,13 +1,20 @@
 {
   "appclips": {
-    "apps": ["QGAQ3AY3R3.com.leeo.FindMe.Clip"]
+    "apps": [
+      "QGAQ3AY3R3.com.leeo.FindMe.Clip",
+      "QGAQ3AY3R3.com.xa.toki.Clip"
+    ]
   },
   "applinks": {
     "apps": [],
     "details": [
       {
         "appID": "QGAQ3AY3R3.com.leeo.FindMe.Clip",
-        "paths": ["/FindMe/l", "/FindMe/l/*", "/FindMe/l?*"]
+        "paths": [
+          "/FindMe/l",
+          "/FindMe/l/*",
+          "/FindMe/l?*"
+        ]
       }
     ]
   }
