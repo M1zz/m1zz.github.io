@@ -10,18 +10,75 @@
 <meta property="og:description" content="설치 없이 이 페이지에서 바로 돌려 보세요. 끝나기 전 원하는 시점마다 알려줍니다.">
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://m1zz.github.io/rereminder/">
+<script>
+/* 기기 언어를 보고 ko/en 을 고른다. <head> 에서 html 클래스를 정하므로 첫 그림부터
+   맞는 언어가 그려진다 — body 클래스로 하면 본문이 한 번 그려진 뒤에 바뀌어 깜빡인다.
+   키는 docs/ 의 세 페이지와 같은 'rereminder-lang' 이다(한 번 고르면 사이트 전체에서 유지). */
+(function () {
+    /* ?lang=en / ?lang=ko — 특정 언어로 바로 여는 링크를 만들 수 있게 한다.
+       (영어 페이지를 그대로 공유할 때 상대의 기기 언어에 휘둘리지 않는다) */
+    var forced = null;
+    try { forced = new URLSearchParams(location.search).get('lang'); } catch (e) {}
+    var saved = null;
+    try { saved = localStorage.getItem('rereminder-lang') || localStorage.getItem('lang'); } catch (e) {}
+    if (forced === 'ko' || forced === 'en') { saved = forced; }
+    var lang = (saved === 'ko' || saved === 'en') ? saved : null;
+    if (!lang) {
+        /* navigator.language 하나만 보면 "영어를 1순위로 두고 한국어도 쓰는" 기기를 놓친다 */
+        var tags = (navigator.languages && navigator.languages.length)
+            ? navigator.languages : [navigator.language || navigator.userLanguage || ''];
+        lang = 'en';
+        for (var i = 0; i < tags.length; i++) {
+            if (String(tags[i]).toLowerCase().indexOf('ko') === 0) { lang = 'ko'; break; }
+        }
+    }
+    document.documentElement.classList.remove('lang-ko', 'lang-en');
+    document.documentElement.classList.add('lang-' + lang);
+    document.documentElement.lang = lang;
+})();
+</script>
 <style>
+    /* 라이트가 기본. 다크는 기기 설정을 따른다 — docs/support.html·privacy.html 과 같은 규칙.
+       토글을 두지 않는 이유도 같다: 읽고 나가는 페이지라 설정을 기억시킬 자리가 아니다. */
     :root {
-        color-scheme: dark;
-        --accent: #007AFF;
-        --bg: #000000;
-        --surface: #111111;
-        --surface2: #1a1a1a;
-        --text: #f5f5f7;
-        --text2: #86868b;
+        color-scheme: light dark;
+        --accent: #0066CC;
+        --bg: #ffffff;
+        --surface: #f7f7f9;
+        --surface2: #eeeef1;
+        --text: #1d1d1f;
+        --text2: #55555c;
         --text3: #6e6e73;
-        --border: #2a2a2a;
-        --marker: #FF9F0A;
+        --border: #dcdce1;
+        /* 종 주황 — 흰 바탕에서 #FF9F0A 는 대비가 모자라 읽히지 않는다 */
+        --marker: #B45309;
+        --track: #d8d8de;                  /* 링 바탕 */
+        --plain: #8e8e93;                  /* 정지 버튼 (앱의 DSColor.plain) */
+        --plain-fg: #ffffff;
+        --handle-edge: rgba(0,0,0,0.24);   /* 흰 핸들이 밝은 바탕에 묻히지 않게 */
+        --badge-bg: rgba(255,255,255,0.97);
+        --badge-shadow: 0 8px 24px rgba(0,0,0,0.16);
+        --pill-hover-border: #b8b8c0;
+    }
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --accent: #007AFF;
+            --bg: #000000;
+            --surface: #111111;
+            --surface2: #1a1a1a;
+            --text: #f5f5f7;
+            --text2: #86868b;
+            --text3: #6e6e73;
+            --border: #2a2a2a;
+            --marker: #FF9F0A;
+            --track: #48484a;
+            --plain: #48484a;
+            --plain-fg: #f5f5f7;
+            --handle-edge: transparent;
+            --badge-bg: rgba(20,20,22,0.94);
+            --badge-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            --pill-hover-border: #3a3a3a;
+        }
     }
     * { box-sizing: border-box; }
     body {
@@ -83,6 +140,9 @@
         }
         .demo-stage { position: relative; width: 100%; max-width: 400px; margin: 0 auto; aspect-ratio: 1; touch-action: none; }
         .demo-dial { width: 100%; height: 100%; display: block; overflow: visible; }
+        .demo-track { stroke: var(--track); }
+        /* 흰 핸들은 밝은 바탕에서 묻힌다 — 라이트에서만 테두리가 생긴다 */
+        .demo-handle { stroke: var(--handle-edge); stroke-width: 2; }
         .demo-dial .hit { cursor: grab; }
         .demo-dial .hit:active { cursor: grabbing; }
 
@@ -105,17 +165,17 @@
         .demo-btn svg { width: 22px; height: 22px; }
         .demo-btn-start { background: #30D158; color: #04220d; }
         .demo-btn-pause { background: #FF9F0A; color: #2b1800; }
-        .demo-btn-stop  { background: #48484a; color: #f5f5f7; }
+        .demo-btn-stop  { background: var(--plain); color: var(--plain-fg); }
         .demo-btn[hidden] { display: none; }
 
         /* Drag badge — two lines, coloured by the ring sections either side of the bell */
         .demo-badge {
             position: absolute; pointer-events: none; z-index: 5;
-            background: rgba(20,20,22,0.94); border: 1px solid var(--border);
+            background: var(--badge-bg); border: 1px solid var(--border);
             border-radius: 10px; padding: 6px 10px; font-size: 13px; font-weight: 600;
             font-variant-numeric: tabular-nums; line-height: 1.45; white-space: nowrap;
             transform: translate(-50%, -50%); opacity: 0; transition: opacity .2s ease;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            box-shadow: var(--badge-shadow);
         }
         .demo-badge.show { opacity: 1; }
         .demo-badge .row { display: flex; gap: 6px; align-items: center; }
@@ -146,7 +206,7 @@
             color: var(--text2); font: inherit; font-size: 14px; font-weight: 500;
             padding: 8px 15px; border-radius: 999px; cursor: pointer; transition: all .15s ease;
         }
-        .demo-pill:hover { color: var(--text); border-color: #3a3a3a; }
+        .demo-pill:hover { color: var(--text); border-color: var(--pill-hover-border); }
         .demo-pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
         .demo-pill[disabled] { opacity: 0.4; cursor: not-allowed; }
         .demo-pill.icon-pill { display: inline-flex; align-items: center; gap: 6px; }
@@ -160,6 +220,25 @@
             .demo-card { padding: 22px 16px 20px; border-radius: 22px; }
             .demo-btn { width: 48px; height: 48px; }
         }
+
+    /* 한 언어만 보인다. 기본 display 가 제각각(블록·리스트·인라인)이라 나눠 적는다. */
+    [data-lang] { display: none; }
+    html.lang-en [data-lang="en"], html.lang-ko [data-lang="ko"] { display: block; }
+    html.lang-en li[data-lang="en"], html.lang-ko li[data-lang="ko"] { display: list-item; }
+    html.lang-en span[data-lang="en"], html.lang-ko span[data-lang="ko"] { display: inline; }
+    /* JS 가 꺼져 있으면 한국어 — 이 초대 페이지의 기본 언어다 */
+    html:not(.lang-en):not(.lang-ko) [data-lang="ko"] { display: block; }
+    html:not(.lang-en):not(.lang-ko) li[data-lang="ko"] { display: list-item; }
+    html:not(.lang-en):not(.lang-ko) span[data-lang="ko"] { display: inline; }
+
+    .langbar { display: flex; justify-content: flex-end; margin-bottom: 18px; }
+    .lang { display: flex; gap: 2px; background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 3px; }
+    .lang button {
+        appearance: none; border: 0; background: transparent; color: var(--text2);
+        font: inherit; font-size: 12px; font-weight: 600; padding: 4px 10px;
+        border-radius: 999px; cursor: pointer; line-height: 1.4;
+    }
+    .lang button[aria-pressed="true"] { background: var(--accent); color: #fff; }
 
     /* 이 페이지는 소개 페이지보다 좁다 — 데모 블록만 폭·여백을 다시 잡는다 */
     .demo-section { padding: 0; margin: 36px 0 0; max-width: 100%; }
@@ -175,9 +254,18 @@
 <body>
 <div class="wrap">
 
+  <div class="langbar">
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-set-lang="ko" aria-pressed="false">한국어</button>
+    </div>
+  </div>
+
   <header>
-    <h1>끝나기 전에<br>미리 알려주는 타이머</h1>
-    <p class="lede">발표가 끝나갈 때 시계를 흘끔거리지 않아도 됩니다.<br>아래에서 바로 돌려 보세요.</p>
+    <h1 data-lang="ko">끝나기 전에<br>미리 알려주는 타이머</h1>
+    <h1 data-lang="en">A timer that warns you<br>before time runs out</h1>
+    <p class="lede" data-lang="ko">발표가 끝나갈 때 시계를 흘끔거리지 않아도 됩니다.<br>아래에서 바로 돌려 보세요.</p>
+    <p class="lede" data-lang="en">Stop glancing at the clock as your talk winds down.<br>Try it right here.</p>
   </header>
 
 <!-- Live Demo — 실제로 돌아가는 다이얼 (저장 없음) -->
@@ -188,7 +276,7 @@
     <div class="demo-card">
         <div class="demo-stage" id="demo-stage">
             <svg class="demo-dial" viewBox="0 0 400 400" id="demo-svg" aria-label="타이머 다이얼">
-                <circle cx="200" cy="200" r="150" fill="none" stroke="#48484a" stroke-opacity="0.5" stroke-width="25"/>
+                <circle class="demo-track" cx="200" cy="200" r="150" fill="none" stroke-width="25"/>
                 <g id="demo-arcs"></g>
                 <g id="demo-knobs"></g>
             </svg>
@@ -250,42 +338,120 @@
     </div>
 </section>
 
-  <a class="cta" href="https://apps.apple.com/app/id6752551268">App Store에서 받기</a>
-  <p class="cta-note">iPhone에서 이 페이지를 열면 App Clip으로 설치 없이 진짜 알림까지 받아볼 수 있어요.</p>
+  <a class="cta" href="https://apps.apple.com/app/id6752551268" data-lang="ko">App Store에서 받기</a>
+  <a class="cta" href="https://apps.apple.com/app/id6752551268" data-lang="en">Get it on the App Store</a>
+  <p class="cta-note" data-lang="ko">iPhone에서 이 페이지를 열면 App Clip으로 설치 없이 진짜 알림까지 받아볼 수 있어요.</p>
+  <p class="cta-note" data-lang="en">Open this page on iPhone and App Clip gives you the real alerts — no install needed.</p>
 
   <section>
-    <h2>어떻게 쓰나요</h2>
+    <h2 data-lang="ko">어떻게 쓰나요</h2>
+    <h2 data-lang="en">How it works</h2>
     <ul class="feats">
-      <li>
+      <li data-lang="ko">
         <b>1. 다이얼을 돌려 시간을 정합니다</b>
         <span>흰 핸들을 끌거나 5·10·25·45·60분 버튼을 누르세요.</span>
       </li>
-      <li>
+      <li data-lang="en">
+        <b>1. Turn the dial to set the time</b>
+        <span>Drag the white handle, or tap 5 / 10 / 25 / 45 / 60 minutes.</span>
+      </li>
+      <li data-lang="ko">
         <b>2. <span class="bell">종</span>을 끌어 알림 지점을 옮깁니다</b>
         <span>종료 10분·5분·1분 전처럼 원하는 만큼 놓을 수 있습니다.</span>
       </li>
-      <li>
+      <li data-lang="en">
+        <b>2. Drag a <span class="bell">bell</span> to move an alert</b>
+        <span>10, 5, 1 minute before the end — put down as many as you want.</span>
+      </li>
+      <li data-lang="ko">
         <b>3. 시작하면 그 지점마다 알려줍니다</b>
         <span>앱에서는 화면을 보고 있지 않아도, 잠금 상태여도 알림이 옵니다.</span>
+      </li>
+      <li data-lang="en">
+        <b>3. Start it, and every bell rings</b>
+        <span>In the app the alerts reach you even when the screen is off or locked.</span>
       </li>
     </ul>
   </section>
 
   <section>
-    <h2>전체 앱에는 더 있습니다</h2>
+    <h2 data-lang="ko">전체 앱에는 더 있습니다</h2>
+    <h2 data-lang="en">The full app has more</h2>
     <ul class="feats">
-      <li><b>발표 모드</b><span>구간을 나눠 순서대로 진행하고, 구간마다 할 말을 적어 둡니다.</span></li>
-      <li><b>템플릿</b><span>자주 쓰는 시간·알림 구성을 저장해 두고 한 번에 불러옵니다.</span></li>
-      <li><b>Apple Watch · 위젯 · 실시간 현황</b><span>손목과 잠금화면에서 바로 확인하고 제어합니다.</span></li>
+      <li data-lang="ko"><b>발표 모드</b><span>구간을 나눠 순서대로 진행하고, 구간마다 할 말을 적어 둡니다.</span></li>
+      <li data-lang="en"><b>Presentation mode</b><span>Split a talk into sections, run them in order, and keep your script for each one.</span></li>
+      <li data-lang="ko"><b>템플릿</b><span>자주 쓰는 시간·알림 구성을 저장해 두고 한 번에 불러옵니다.</span></li>
+      <li data-lang="en"><b>Templates</b><span>Save the durations and alerts you use often, then load them in one tap.</span></li>
+      <li data-lang="ko"><b>Apple Watch · 위젯 · 실시간 현황</b><span>손목과 잠금화면에서 바로 확인하고 제어합니다.</span></li>
+      <li data-lang="en"><b>Apple Watch · Widgets · Live Activity</b><span>Check it and control it from your wrist and Lock Screen.</span></li>
     </ul>
   </section>
 
   <footer>
-    <p>두번알림 · <a href="https://apps.apple.com/app/id6752551268">App Store</a> ·
+    <p data-lang="ko">두번알림 · <a href="https://apps.apple.com/app/id6752551268">App Store</a> ·
        <a href="https://m1zz.github.io/Rereminder/">앱 소개</a></p>
+    <p data-lang="en">Rereminder · <a href="https://apps.apple.com/app/id6752551268">App Store</a> ·
+       <a href="https://m1zz.github.io/Rereminder/">About the app</a></p>
   </footer>
 
 </div>
+
+<script>
+/* 언어 전환 — <head> 가 정한 값을 이어받아 제목·설명·버튼 상태를 맞추고,
+   안쪽 데모에는 `langchange` 로 알린다(데모는 자기 사전 STR 을 따로 갖고 있다). */
+(function () {
+    var KEY = 'rereminder-lang';
+    var META = {
+        ko: {
+            title: '두번알림 — 끝나기 전에 미리 알려주는 타이머',
+            description: '발표·운동·스터디 중 끝나기 전 원하는 시점마다 미리 알려주는 타이머. 설치 없이 이 페이지에서 바로 돌려 보세요.',
+            ogTitle: '두번알림 — 끝나기 전에 미리 알려주는 타이머',
+            ogDescription: '설치 없이 이 페이지에서 바로 돌려 보세요. 끝나기 전 원하는 시점마다 알려줍니다.',
+            dial: '타이머 다이얼'
+        },
+        en: {
+            title: 'Rereminder — a timer that warns you before time runs out',
+            description: 'A timer that alerts you at any point before time runs out — talks, workouts, study sessions. Try it right here, no install.',
+            ogTitle: 'Rereminder — a timer that warns you before time runs out',
+            ogDescription: 'Try it right here, no install. It warns you at every point you choose before the end.',
+            dial: 'Timer dial'
+        }
+    };
+
+    function setMeta(selector, value) {
+        var el = document.querySelector(selector);
+        if (el) { el.setAttribute('content', value); }
+    }
+
+    function apply(lang, persist) {
+        var meta = META[lang] || META.en;
+        document.documentElement.classList.remove('lang-ko', 'lang-en');
+        document.documentElement.classList.add('lang-' + lang);
+        document.documentElement.lang = lang;
+        document.title = meta.title;
+        setMeta('meta[name="description"]', meta.description);
+        setMeta('meta[property="og:title"]', meta.ogTitle);
+        setMeta('meta[property="og:description"]', meta.ogDescription);
+        var dial = document.getElementById('demo-svg');
+        if (dial) { dial.setAttribute('aria-label', meta.dial); }
+        var buttons = document.querySelectorAll('[data-set-lang]');
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].setAttribute('aria-pressed', String(buttons[i].getAttribute('data-set-lang') === lang));
+        }
+        // 자동 감지 결과는 저장하지 않는다 — 저장하면 기기 언어를 바꿔도 첫 방문에
+        // 감지한 언어가 계속 따라온다. 저장은 사용자가 눌렀을 때만.
+        if (persist) { try { localStorage.setItem(KEY, lang); } catch (e) {} }
+        window.dispatchEvent(new CustomEvent('langchange', { detail: lang }));
+    }
+
+    apply(document.documentElement.classList.contains('lang-ko') ? 'ko' : 'en', false);
+
+    document.addEventListener('click', function (event) {
+        var button = event.target && event.target.closest ? event.target.closest('[data-set-lang]') : null;
+        if (button) { apply(button.getAttribute('data-set-lang'), true); }
+    });
+})();
+</script>
 
 <script>
 (function () {
@@ -303,6 +469,12 @@
 
     var STR = {
         en: {
+            /* 알약 라벨은 값에서 만든다 — 언어마다 단위만 다르다.
+               영어는 "before" 를 붙이지 않는다. 줄 제목이 이미 그 말을 하고 있고,
+               알약 안에 넣으면 한 줄에 여섯 개가 들어가지 않는다. */
+            unitMin: 'm',
+            unitSec: 's',
+            beforeSuffix: '',
             title: 'Try it right here',
             subtitle: 'Drag the white handle to set the length, drag the orange bells to place your alerts, then press start. No install, no sign-up — this runs in your browser.',
             lengthLabel: 'Length',
@@ -321,6 +493,9 @@
             sectionOf: 'Section'
         },
         ko: {
+            unitMin: '분',
+            unitSec: '초',
+            beforeSuffix: ' 전',
             title: '여기서 바로 써 보세요',
             subtitle: '흰 핸들을 끌어 시간을, 주황 종을 끌어 알림 지점을 정하고 시작을 누르세요. 설치도 가입도 없이, 브라우저에서 그대로 돕니다.',
             lengthLabel: '전체 시간',
@@ -488,6 +663,7 @@
         handle.setAttribute('cx', hp.x); handle.setAttribute('cy', hp.y);
         handle.setAttribute('r', state === 'idle' ? 13 : 7);
         handle.setAttribute('fill', '#ffffff');
+        handle.setAttribute('class', 'demo-handle');
         el.knobs.appendChild(handle);
         if (state === 'idle') {
             var hh = svgEl('circle');
@@ -781,6 +957,15 @@
         if (el.note) {
             el.note.innerHTML = (speed === 60 ? '<strong>' + s.fastNote + '</strong><br>' : '') + s.note;
         }
+        // 알약 라벨은 값에서 만든다 (마크업에 박아 두면 언어를 못 따라간다)
+        document.querySelectorAll('[data-demo-preset]').forEach(function (b) {
+            var sec = Number(b.getAttribute('data-demo-preset'));
+            b.textContent = (sec / 60) + s.unitMin;
+        });
+        document.querySelectorAll('[data-demo-alert]').forEach(function (b) {
+            var sec = Number(b.getAttribute('data-demo-alert'));
+            b.textContent = (sec >= 60 ? (sec / 60) + s.unitMin : sec + s.unitSec) + s.beforeSuffix;
+        });
     }
     window.addEventListener('langchange', function (e) {
         lang = (e.detail === 'ko') ? 'ko' : 'en';
