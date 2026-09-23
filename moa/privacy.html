@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>모아 (Moa) — 개인정보 처리방침</title>
+<style>
+  :root { --bg:#F3F6F5; --card:#FFFFFF; --ink:#10323A; --subtle:#5B6F73; --accent:#146070; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0D1A1D; --card:#15262A; --ink:#E8F0EF; --subtle:#9FB2B4; --accent:#6FC6D6; } }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif; line-height:1.7; }
+  .wrap { max-width:680px; margin:0 auto; padding:48px 20px 80px; }
+  .mark { width:56px; height:56px; border-radius:14px; background:linear-gradient(#14606E, #F08A5D); }
+  h1 { font-size:26px; margin:16px 0 4px; }
+  .sub { color:var(--subtle); font-size:15px; margin-bottom:32px; }
+  h2 { font-size:19px; color:var(--accent); margin:32px 0 10px; }
+  p, li { font-size:16px; word-break:keep-all; }
+  ul { padding-left:20px; }
+  li { margin-bottom:6px; }
+  .card { background:var(--card); border-radius:16px; padding:20px 22px; margin-bottom:8px; box-shadow:0 2px 10px rgba(0,0,0,.04); }
+  .highlight { background:var(--card); border-left:4px solid var(--accent); border-radius:12px; padding:16px 20px; margin:20px 0; font-weight:600; word-break:keep-all; }
+  a { color:var(--accent); }
+  footer { margin-top:48px; font-size:15px; color:var(--subtle); text-align:center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mark" aria-hidden="true"></div>
+  <h1>개인정보 처리방침</h1>
+  <p class="sub">모아 (Moa) · 시행일: 2026년 9월 23일</p>
+
+  <div class="highlight">
+    요약: 모아는 회원가입이 없고, 개발자가 사진을 모아 두는 서버도 없습니다. 사진은 보내는 사람의 iPhone에서 받는 사람의 iPhone으로 갑니다. 개발자는 사진을 보관하지도, 열어보지도 않습니다.
+  </div>
+
+  <h2>1. 수집하는 개인정보</h2>
+  <div class="card">
+    <p>모아는 이름, 이메일, 전화번호, 계정 정보를 <strong>수집하지 않습니다.</strong> 회원가입과 로그인이 없습니다.</p>
+    <p>앱 안에서 다루는 정보는 다음뿐이며, 모두 사용자의 기기에 머뭅니다.</p>
+    <ul>
+      <li><strong>사진과 동영상</strong>: 보내는 사람이 직접 고른 항목. 촬영 시각·위치 등 파일에 들어 있는 정보가 원본 그대로 함께 전달됩니다. 받는 사람의 사진 앱에 그 정보가 그대로 기록됩니다.</li>
+      <li><strong>보내는 사람 이름</strong>: 입력하지 않아도 됩니다. 받는 사람의 화면에 누가 보냈는지 보여주는 용도로만 쓰이고, 그 기기에만 저장됩니다.</li>
+      <li><strong>이벤트 이름과 받은 개수</strong>: 받는 사람의 기기에만 저장됩니다.</li>
+    </ul>
+  </div>
+
+  <h2>2. 사진이 오가는 방식</h2>
+  <div class="card">
+    <ul>
+      <li><strong>같은 Wi-Fi에 있을 때</strong>: 보내는 사람의 iPhone이 받는 사람의 iPhone에 직접 연결해 보냅니다. 중간에 거치는 서버가 없습니다.</li>
+      <li><strong>바로 보내지 못했을 때</strong>: 파일과 관련 정보를 기기에서 암호화한 뒤 Apple의 iCloud(CloudKit) 공개 데이터베이스에 잠시 올려 두고, 받는 사람이 가져갑니다. 암호를 푸는 열쇠는 QR 안에만 있어서, <strong>QR을 찍은 사람과 받는 사람 외에는 개발자를 포함해 누구도 내용을 볼 수 없습니다.</strong> 받는 사람의 사진 앱에 들어가는 즉시 삭제됩니다.</li>
+      <li>개발자가 운영하는 별도의 서버는 없습니다.</li>
+    </ul>
+  </div>
+
+  <h2>3. 기기에서 쓰는 권한</h2>
+  <div class="card">
+    <ul>
+      <li><strong>사진(받는 사람)</strong>: 받은 사진을 사진 앱에 넣고 이벤트 앨범을 만들기 위해 필요합니다.</li>
+      <li><strong>로컬 네트워크</strong>: 같은 Wi-Fi에 있는 상대의 iPhone과 연결하기 위해 필요합니다.</li>
+      <li><strong>보내는 사람</strong>은 사진 접근 권한을 주지 않아도 됩니다. Apple이 제공하는 사진 선택 화면을 쓰기 때문에, 직접 고른 항목만 앱에 전달됩니다.</li>
+    </ul>
+  </div>
+
+  <h2>4. 제3자 제공 및 외부 서비스</h2>
+  <div class="card">
+    <ul>
+      <li>개인정보를 제3자에게 제공하지 않습니다.</li>
+      <li>광고 SDK, 분석(애널리틱스) 도구, 추적 기술을 사용하지 않습니다.</li>
+      <li>사진을 잠시 거쳐 갈 때 Apple의 iCloud 인프라를 이용합니다. 이때도 내용은 암호화된 상태입니다.</li>
+    </ul>
+  </div>
+
+  <h2>5. 보관 기간과 삭제</h2>
+  <div class="card">
+    <ul>
+      <li>받은 사진은 받는 사람의 사진 앱에 남습니다. 사진 앱에서 언제든 지울 수 있습니다.</li>
+      <li>이벤트 정보는 앱에서 이벤트를 지우거나 앱을 삭제하면 함께 사라집니다.</li>
+      <li>iCloud를 거쳐 간 항목은 받는 사람이 가져가는 즉시 삭제됩니다.</li>
+    </ul>
+  </div>
+
+  <h2>6. 아동의 개인정보</h2>
+  <div class="card">
+    <p>모아는 아동을 포함한 어떤 사용자의 개인정보도 수집하지 않습니다.</p>
+  </div>
+
+  <h2>7. 이용자가 알아두면 좋은 점</h2>
+  <div class="card">
+    <p>사진에는 찍은 장소가 들어 있을 수 있습니다. 위치를 함께 보내고 싶지 않다면, 사진을 고르는 화면의 &lsquo;옵션&rsquo;에서 위치 포함을 꺼 주세요.</p>
+  </div>
+
+  <h2>8. 방침 변경</h2>
+  <div class="card">
+    <p>이 방침이 변경되면 이 페이지에 공지합니다. 중요한 변경이 있으면 앱 업데이트 노트에도 안내합니다.</p>
+  </div>
+
+  <h2>9. 문의</h2>
+  <div class="card">
+    <p>개인정보 관련 문의: <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a></p>
+  </div>
+
+  <footer>
+    <a href="./">모아 소개</a> · © 2026 모아
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>모아 (Moa) — QR 하나로 사진 모으기</title>
+<meta name="description" content="행사에서 QR을 보여주면, 앱을 설치하지 않은 사람도 사진을 보낼 수 있어요. 받은 사진은 원본 그대로, 찍은 시각 그대로 사진 앱에 들어가요.">
+<style>
+  :root { --bg:#F3F6F5; --card:#FFFFFF; --ink:#10323A; --subtle:#5B6F73; --accent:#146070; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0D1A1D; --card:#15262A; --ink:#E8F0EF; --subtle:#9FB2B4; --accent:#6FC6D6; } }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif; line-height:1.7; }
+  .wrap { max-width:680px; margin:0 auto; padding:48px 20px 80px; }
+  .mark { width:72px; height:72px; border-radius:18px; background:linear-gradient(#14606E, #F08A5D); }
+  h1 { font-size:28px; margin:20px 0 6px; word-break:keep-all; }
+  .sub { color:var(--subtle); font-size:16px; margin-bottom:32px; word-break:keep-all; }
+  h2 { font-size:19px; color:var(--accent); margin:32px 0 10px; }
+  p, li { font-size:16px; word-break:keep-all; }
+  ul { padding-left:20px; }
+  li { margin-bottom:6px; }
+  .card { background:var(--card); border-radius:16px; padding:20px 22px; margin-bottom:8px; box-shadow:0 2px 10px rgba(0,0,0,.04); }
+  .steps { counter-reset:step; list-style:none; padding:0; }
+  .steps li { counter-increment:step; position:relative; padding-left:34px; margin-bottom:12px; }
+  .steps li::before { content:counter(step); position:absolute; left:0; top:2px; width:24px; height:24px; border-radius:12px;
+                      background:var(--accent); color:#fff; font-size:14px; font-weight:700; display:grid; place-items:center; }
+  a { color:var(--accent); }
+  footer { margin-top:48px; font-size:15px; color:var(--subtle); text-align:center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mark" aria-hidden="true"></div>
+  <h1>모아</h1>
+  <p class="sub">QR 하나로 사진을 모아, 원본 그대로 · 찍은 시각 그대로 내 사진 앱에 넣어주는 앱</p>
+
+  <h2>이런 앱이에요</h2>
+  <div class="card">
+    <p>행사가 끝나고 “사진 좀 보내주세요” 하고 며칠을 기다리는 일이 없어지게 만들었어요. 호스트는 QR을 보여주기만 하고, 게스트는 카메라로 찍어서 그 자리에서 보내요.</p>
+  </div>
+
+  <h2>쓰는 순서</h2>
+  <div class="card">
+    <ul class="steps">
+      <li>호스트가 모아 앱에서 이벤트를 만들고 QR을 띄워요.</li>
+      <li>게스트가 iPhone 카메라로 QR을 찍어요. <strong>앱을 설치하지 않아도 돼요.</strong> App Clip이 잠깐 열려요.</li>
+      <li>게스트가 보낼 사진과 동영상을 골라요.</li>
+      <li>사진이 호스트의 사진 앱에 바로 들어가요. 이벤트 이름의 앨범에도 정리돼요.</li>
+    </ul>
+  </div>
+
+  <h2>이런 점이 달라요</h2>
+  <div class="card">
+    <ul>
+      <li><strong>설치가 필요 없어요.</strong> 보내는 사람은 App Clip으로 보내요. 가입도 로그인도 없어요.</li>
+      <li><strong>원본 그대로 가요.</strong> HEIC와 Live Photo, 동영상을 압축하지 않고 그대로 보내요.</li>
+      <li><strong>찍은 시각 그대로 놓여요.</strong> 받은 사진이 오늘 자리가 아니라 실제로 찍은 날짜 자리에 들어가요. 내 카메라로 찍은 사진처럼 섞여요.</li>
+      <li><strong>모아 두는 서버가 없어요.</strong> 같은 Wi-Fi에 있으면 게스트의 iPhone에서 호스트의 iPhone으로 바로 가요.</li>
+    </ul>
+  </div>
+
+  <h2>알아두면 좋은 것</h2>
+  <div class="card">
+    <ul>
+      <li>호스트가 이벤트 화면을 열어 둔 동안 사진이 들어와요.</li>
+      <li>같은 Wi-Fi에서 바로 보내지 못하면, 사진을 암호화해 iCloud를 잠깐 거쳐 보내요. 호스트가 받으면 지워져요.</li>
+      <li>QR은 화면을 다시 열 때마다 새로 만들어져요. 지난 QR로는 보낼 수 없어요.</li>
+    </ul>
+  </div>
+
+  <footer>
+    <a href="privacy.html">개인정보 처리방침</a> ·
+    <a href="mailto:mizzking75@gmail.com">문의</a> ·
+    © 2026 모아
+  </footer>
+</div>
+</body>
+</html>
