@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Botaejwo — Collect Event Photos with One QR Code</title>
+<meta name="description" content="Show a QR code at your event and guests send their photos without installing an app. Originals land in your Photos app at the moment they were taken.">
+<link rel="alternate" hreflang="ko" href="https://m1zz.github.io/moa/">
+<style>
+  :root { --bg:#F3F6F5; --card:#FFFFFF; --ink:#10323A; --subtle:#5B6F73; --accent:#146070; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0D1A1D; --card:#15262A; --ink:#E8F0EF; --subtle:#9FB2B4; --accent:#6FC6D6; } }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif; line-height:1.7; }
+  .wrap { max-width:680px; margin:0 auto; padding:48px 20px 80px; }
+  .mark { width:72px; height:72px; border-radius:18px; background:linear-gradient(#14606E, #F08A5D); }
+  h1 { font-size:28px; margin:20px 0 6px; word-break:keep-all; }
+  .sub { color:var(--subtle); font-size:16px; margin-bottom:32px; word-break:keep-all; }
+  h2 { font-size:19px; color:var(--accent); margin:32px 0 10px; }
+  p, li { font-size:16px; word-break:keep-all; }
+  ul { padding-left:20px; }
+  li { margin-bottom:6px; }
+  .card { background:var(--card); border-radius:16px; padding:20px 22px; margin-bottom:8px; box-shadow:0 2px 10px rgba(0,0,0,.04); }
+  .steps { counter-reset:step; list-style:none; padding:0; }
+  .steps li { counter-increment:step; position:relative; padding-left:34px; margin-bottom:12px; }
+  .steps li::before { content:counter(step); position:absolute; left:0; top:2px; width:24px; height:24px; border-radius:12px;
+                      background:var(--accent); color:#fff; font-size:14px; font-weight:700; display:grid; place-items:center; }
+  a { color:var(--accent); }
+  footer { margin-top:48px; font-size:15px; color:var(--subtle); text-align:center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mark" aria-hidden="true"></div>
+  <h1>Botaejwo</h1>
+  <p class="sub">Collect everyone's photos with one QR code, as originals, right where they were taken in your Photos app.</p>
+
+  <h2>What it does</h2>
+  <div class="card">
+    <p>No more waiting days for people to send their photos after an event. The host shows a QR code, and guests scan it with their camera and send their photos on the spot.</p>
+  </div>
+
+  <h2>How it works</h2>
+  <div class="card">
+    <ul class="steps">
+      <li>The host creates an event in Botaejwo and shows its QR code.</li>
+      <li>Guests scan it with the iPhone camera. <strong>There's no app to install.</strong> An App Clip opens for a moment.</li>
+      <li>Guests pick the photos and videos they want to send.</li>
+      <li>Everything goes straight into the host's Photos app, in an album named after the event.</li>
+    </ul>
+  </div>
+
+  <h2>Why it's different</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Nothing to install.</strong> Guests send through an App Clip. No account, no sign in.</li>
+      <li><strong>Originals, untouched.</strong> HEIC photos, Live Photos and videos arrive without being recompressed.</li>
+      <li><strong>Right where they belong.</strong> Received photos sit at the date they were taken, not at today, so they blend in with your own shots.</li>
+      <li><strong>No server holding your photos.</strong> On the same Wi-Fi, photos go straight from the guest's iPhone to the host's.</li>
+      <li><strong>See who sent what.</strong> When guests add their name, it appears with each of their photos.</li>
+    </ul>
+  </div>
+
+  <h2>Good to know</h2>
+  <div class="card">
+    <ul>
+      <li>Photos arrive while the host keeps the event screen open.</li>
+      <li>If a photo can't be sent directly over Wi-Fi, it's encrypted and passes briefly through iCloud, then deleted as soon as the host receives it.</li>
+      <li>A new QR code is made each time the event screen opens. Older codes stop working.</li>
+    </ul>
+  </div>
+
+  <footer>
+    <a href="privacy.html">Privacy Policy</a> ·
+    <a href="mailto:mizzking75@gmail.com">Contact</a> ·
+    <a href="../">한국어</a> ·
+    © 2026 Botaejwo
+  </footer>
+</div>
+</body>
+</html>
