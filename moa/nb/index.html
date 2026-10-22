@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Botaejwo — Samle bilder fra arrangementet med én QR-kode</title>
+<meta name="description" content="Vis en QR-kode på arrangementet, så sender gjestene bildene sine uten å installere en app. Originalene havner i Bilder-appen på tidspunktet de ble tatt.">
+<style>
+  :root { --bg:#F3F6F5; --card:#FFFFFF; --ink:#10323A; --subtle:#5B6F73; --accent:#146070; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0D1A1D; --card:#15262A; --ink:#E8F0EF; --subtle:#9FB2B4; --accent:#6FC6D6; } }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif; line-height:1.7; }
+  .wrap { max-width:680px; margin:0 auto; padding:48px 20px 80px; }
+  .mark { width:72px; height:72px; border-radius:18px; background:linear-gradient(#14606E, #F08A5D); }
+  h1 { font-size:28px; margin:20px 0 6px; word-break:keep-all; }
+  .sub { color:var(--subtle); font-size:16px; margin-bottom:32px; word-break:keep-all; }
+  h2 { font-size:19px; color:var(--accent); margin:32px 0 10px; }
+  p, li { font-size:16px; word-break:keep-all; }
+  ul { padding-left:20px; }
+  li { margin-bottom:6px; }
+  .card { background:var(--card); border-radius:16px; padding:20px 22px; margin-bottom:8px; box-shadow:0 2px 10px rgba(0,0,0,.04); }
+  .steps { counter-reset:step; list-style:none; padding:0; }
+  .steps li { counter-increment:step; position:relative; padding-left:34px; margin-bottom:12px; }
+  .steps li::before { content:counter(step); position:absolute; left:0; top:2px; width:24px; height:24px; border-radius:12px;
+                      background:var(--accent); color:#fff; font-size:14px; font-weight:700; display:grid; place-items:center; }
+  a { color:var(--accent); }
+  footer { margin-top:48px; font-size:15px; color:var(--subtle); text-align:center; }
+</style>
+<link rel="canonical" href="https://m1zz.github.io/moa/nb/">
+<link rel="alternate" hreflang="ko" href="https://m1zz.github.io/moa/">
+<link rel="alternate" hreflang="en" href="https://m1zz.github.io/moa/en/">
+<link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/moa/zh-hans/">
+<link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/moa/zh-hant/">
+<link rel="alternate" hreflang="ja" href="https://m1zz.github.io/moa/ja/">
+<link rel="alternate" hreflang="ru" href="https://m1zz.github.io/moa/ru/">
+<link rel="alternate" hreflang="es" href="https://m1zz.github.io/moa/es/">
+<link rel="alternate" hreflang="de" href="https://m1zz.github.io/moa/de/">
+<link rel="alternate" hreflang="fr" href="https://m1zz.github.io/moa/fr/">
+<link rel="alternate" hreflang="it" href="https://m1zz.github.io/moa/it/">
+<link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/moa/pt-br/">
+<link rel="alternate" hreflang="th" href="https://m1zz.github.io/moa/th/">
+<link rel="alternate" hreflang="vi" href="https://m1zz.github.io/moa/vi/">
+<link rel="alternate" hreflang="cs" href="https://m1zz.github.io/moa/cs/">
+<link rel="alternate" hreflang="da" href="https://m1zz.github.io/moa/da/">
+<link rel="alternate" hreflang="el" href="https://m1zz.github.io/moa/el/">
+<link rel="alternate" hreflang="fi" href="https://m1zz.github.io/moa/fi/">
+<link rel="alternate" hreflang="id" href="https://m1zz.github.io/moa/id/">
+<link rel="alternate" hreflang="nb" href="https://m1zz.github.io/moa/nb/">
+<link rel="alternate" hreflang="nl" href="https://m1zz.github.io/moa/nl/">
+<link rel="alternate" hreflang="pl" href="https://m1zz.github.io/moa/pl/">
+<link rel="alternate" hreflang="sv" href="https://m1zz.github.io/moa/sv/">
+<link rel="alternate" hreflang="tr" href="https://m1zz.github.io/moa/tr/">
+<link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/moa/">
+</head>
+<body>
+<div class="wrap">
+  <div class="mark" aria-hidden="true"></div>
+  <h1>Botaejwo</h1>
+  <p class="sub">Samle alles bilder med én QR-kode, i original, akkurat der de hører hjemme i tidslinjen i Bilder-appen.</p>
+
+  <h2>Hva den gjør</h2>
+  <div class="card">
+    <p>Slutt på å vente i dagevis på at folk skal sende bildene sine etter et arrangement. Verten viser en QR-kode, og gjestene skanner den med kameraet og sender bildene sine med en gang.</p>
+  </div>
+
+  <h2>Slik fungerer det</h2>
+  <div class="card">
+    <ul class="steps">
+      <li>Verten oppretter et arrangement i Botaejwo og viser QR-koden.</li>
+      <li>Gjestene skanner den med iPhone-kameraet. <strong>Det er ingen app å installere.</strong> Et appklipp åpnes en liten stund.</li>
+      <li>Gjestene velger bildene og videoene de vil sende.</li>
+      <li>Alt havner rett i vertens Bilder-app, i et album med samme navn som arrangementet.</li>
+    </ul>
+  </div>
+
+  <h2>Dette gjør den annerledes</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Ingenting å installere.</strong> Gjestene sender via et appklipp. Ingen konto, ingen innlogging.</li>
+      <li><strong>Originaler, urørt.</strong> HEIC-bilder, Live Photos og videoer kommer frem uten å bli komprimert på nytt.</li>
+      <li><strong>Akkurat der de hører hjemme.</strong> Mottatte bilder plasseres på datoen de ble tatt, ikke på dagens dato, så de glir sømløst inn blant dine egne bilder.</li>
+      <li><strong>Ingen server som tar vare på bildene dine.</strong> På samme Wi-Fi går bildene rett fra gjestens iPhone til vertens.</li>
+      <li><strong>Se hvem som sendte hva.</strong> Når gjestene legger til navnet sitt, vises det sammen med hvert av bildene deres.</li>
+    </ul>
+  </div>
+
+  <h2>Greit å vite</h2>
+  <div class="card">
+    <ul>
+      <li>Bildene kommer frem så lenge verten holder arrangementsskjermen åpen.</li>
+      <li>Hvis et bilde ikke kan sendes direkte over Wi-Fi, krypteres det og går en kort tur innom iCloud. Det slettes så snart verten har mottatt det.</li>
+      <li>Det lages en ny QR-kode hver gang arrangementsskjermen åpnes. Eldre koder slutter å virke.</li>
+    </ul>
+  </div>
+
+  <footer>
+    <a href="privacy.html">Personvernerklæring</a> ·
+    <a href="mailto:mizzking75@gmail.com">Kontakt</a> ·
+    <a href="../" lang="ko">한국어</a> · <a href="../en/" lang="en">English</a> · <a href="../zh-hans/" lang="zh-Hans">简体中文</a> · <a href="../zh-hant/" lang="zh-Hant">繁體中文</a> · <a href="../ja/" lang="ja">日本語</a> · <a href="../ru/" lang="ru">Русский</a> · <a href="../es/" lang="es">Español</a> · <a href="../de/" lang="de">Deutsch</a> · <a href="../fr/" lang="fr">Français</a> · <a href="../it/" lang="it">Italiano</a> · <a href="../pt-br/" lang="pt-BR">Português (Brasil)</a> · <a href="../th/" lang="th">ไทย</a> · <a href="../vi/" lang="vi">Tiếng Việt</a> · <a href="../cs/" lang="cs">Čeština</a> · <a href="../da/" lang="da">Dansk</a> · <a href="../el/" lang="el">Ελληνικά</a> · <a href="../fi/" lang="fi">Suomi</a> · <a href="../id/" lang="id">Bahasa Indonesia</a> · <a href="../nl/" lang="nl">Nederlands</a> · <a href="../pl/" lang="pl">Polski</a> · <a href="../sv/" lang="sv">Svenska</a> · <a href="../tr/" lang="tr">Türkçe</a> ·
+    © 2026 Botaejwo
+  </footer>
+</div>
+</body>
+</html>

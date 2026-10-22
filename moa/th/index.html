@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Botaejwo — รวมรูปจากงานด้วย QR โค้ดเดียว</title>
+<meta name="description" content="แสดง QR โค้ดในงานของคุณ แล้วแขกก็ส่งรูปมาให้ได้เลยโดยไม่ต้องติดตั้งแอป ไฟล์ต้นฉบับจะเข้าไปอยู่ในแอปรูปภาพของคุณตรงตามเวลาที่ถ่าย">
+<style>
+  :root { --bg:#F3F6F5; --card:#FFFFFF; --ink:#10323A; --subtle:#5B6F73; --accent:#146070; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0D1A1D; --card:#15262A; --ink:#E8F0EF; --subtle:#9FB2B4; --accent:#6FC6D6; } }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Thonburi","Apple SD Gothic Neo","Noto Sans KR",sans-serif; line-height:1.7; }
+  .wrap { max-width:680px; margin:0 auto; padding:48px 20px 80px; }
+  .mark { width:72px; height:72px; border-radius:18px; background:linear-gradient(#14606E, #F08A5D); }
+  h1 { font-size:28px; margin:20px 0 6px; word-break:keep-all; }
+  .sub { color:var(--subtle); font-size:16px; margin-bottom:32px; word-break:keep-all; }
+  h2 { font-size:19px; color:var(--accent); margin:32px 0 10px; }
+  p, li { font-size:16px; word-break:keep-all; }
+  ul { padding-left:20px; }
+  li { margin-bottom:6px; }
+  .card { background:var(--card); border-radius:16px; padding:20px 22px; margin-bottom:8px; box-shadow:0 2px 10px rgba(0,0,0,.04); }
+  .steps { counter-reset:step; list-style:none; padding:0; }
+  .steps li { counter-increment:step; position:relative; padding-left:34px; margin-bottom:12px; }
+  .steps li::before { content:counter(step); position:absolute; left:0; top:2px; width:24px; height:24px; border-radius:12px;
+                      background:var(--accent); color:#fff; font-size:14px; font-weight:700; display:grid; place-items:center; }
+  a { color:var(--accent); }
+  footer { margin-top:48px; font-size:15px; color:var(--subtle); text-align:center; }
+</style>
+<link rel="canonical" href="https://m1zz.github.io/moa/th/">
+<link rel="alternate" hreflang="ko" href="https://m1zz.github.io/moa/">
+<link rel="alternate" hreflang="en" href="https://m1zz.github.io/moa/en/">
+<link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/moa/zh-hans/">
+<link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/moa/zh-hant/">
+<link rel="alternate" hreflang="ja" href="https://m1zz.github.io/moa/ja/">
+<link rel="alternate" hreflang="ru" href="https://m1zz.github.io/moa/ru/">
+<link rel="alternate" hreflang="es" href="https://m1zz.github.io/moa/es/">
+<link rel="alternate" hreflang="de" href="https://m1zz.github.io/moa/de/">
+<link rel="alternate" hreflang="fr" href="https://m1zz.github.io/moa/fr/">
+<link rel="alternate" hreflang="it" href="https://m1zz.github.io/moa/it/">
+<link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/moa/pt-br/">
+<link rel="alternate" hreflang="th" href="https://m1zz.github.io/moa/th/">
+<link rel="alternate" hreflang="vi" href="https://m1zz.github.io/moa/vi/">
+<link rel="alternate" hreflang="cs" href="https://m1zz.github.io/moa/cs/">
+<link rel="alternate" hreflang="da" href="https://m1zz.github.io/moa/da/">
+<link rel="alternate" hreflang="el" href="https://m1zz.github.io/moa/el/">
+<link rel="alternate" hreflang="fi" href="https://m1zz.github.io/moa/fi/">
+<link rel="alternate" hreflang="id" href="https://m1zz.github.io/moa/id/">
+<link rel="alternate" hreflang="nb" href="https://m1zz.github.io/moa/nb/">
+<link rel="alternate" hreflang="nl" href="https://m1zz.github.io/moa/nl/">
+<link rel="alternate" hreflang="pl" href="https://m1zz.github.io/moa/pl/">
+<link rel="alternate" hreflang="sv" href="https://m1zz.github.io/moa/sv/">
+<link rel="alternate" hreflang="tr" href="https://m1zz.github.io/moa/tr/">
+<link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/moa/">
+</head>
+<body>
+<div class="wrap">
+  <div class="mark" aria-hidden="true"></div>
+  <h1>Botaejwo</h1>
+  <p class="sub">รวมรูปของทุกคนด้วย QR โค้ดเดียว ได้เป็นไฟล์ต้นฉบับ และเรียงอยู่ตรงตามเวลาที่ถ่ายในแอปรูปภาพของคุณ</p>
+
+  <h2>ทำอะไรได้บ้าง</h2>
+  <div class="card">
+    <p>ไม่ต้องรอเป็นวันๆ ให้ทุกคนส่งรูปมาหลังจบงานอีกต่อไป เจ้าของงานแค่แสดง QR โค้ด แขกก็สแกนด้วยกล้องแล้วส่งรูปได้ทันทีตรงนั้นเลย</p>
+  </div>
+
+  <h2>ใช้งานอย่างไร</h2>
+  <div class="card">
+    <ul class="steps">
+      <li>เจ้าของงานสร้างงานใน Botaejwo แล้วแสดง QR โค้ดของงานนั้น</li>
+      <li>แขกสแกนด้วยกล้องของ iPhone <strong>ไม่ต้องติดตั้งแอปใดๆ</strong> เพราะ App Clip จะเปิดขึ้นมาเพียงครู่เดียว</li>
+      <li>แขกเลือกรูปและวิดีโอที่ต้องการส่ง</li>
+      <li>ทุกอย่างจะเข้าไปที่แอปรูปภาพของเจ้าของงานโดยตรง ในอัลบั้มที่ตั้งชื่อตามงาน</li>
+    </ul>
+  </div>
+
+  <h2>อะไรที่ทำให้แตกต่าง</h2>
+  <div class="card">
+    <ul>
+      <li><strong>ไม่ต้องติดตั้งอะไร</strong> แขกส่งผ่าน App Clip ไม่ต้องมีบัญชี ไม่ต้องลงชื่อเข้าใช้</li>
+      <li><strong>ได้ต้นฉบับแท้ๆ</strong> รูป HEIC, Live Photos และวิดีโอมาถึงโดยไม่ถูกบีบอัดซ้ำ</li>
+      <li><strong>อยู่ในที่ที่ควรอยู่</strong> รูปที่ได้รับจะเรียงอยู่ตามวันที่ถ่าย ไม่ใช่วันนี้ จึงกลมกลืนไปกับรูปที่คุณถ่ายเอง</li>
+      <li><strong>ไม่มีเซิร์ฟเวอร์เก็บรูปของคุณ</strong> เมื่ออยู่ใน Wi-Fi เดียวกัน รูปจะส่งจาก iPhone ของแขกไปยัง iPhone ของเจ้าของงานโดยตรง</li>
+      <li><strong>รู้ว่าใครส่งรูปไหน</strong> หากแขกใส่ชื่อไว้ ชื่อจะแสดงอยู่กับรูปแต่ละรูปที่เขาส่ง</li>
+    </ul>
+  </div>
+
+  <h2>ข้อควรรู้</h2>
+  <div class="card">
+    <ul>
+      <li>รูปจะส่งมาถึงในระหว่างที่เจ้าของงานเปิดหน้าจอของงานค้างไว้</li>
+      <li>หากส่งรูปผ่าน Wi-Fi โดยตรงไม่ได้ รูปจะถูกเข้ารหัสและผ่าน iCloud เพียงชั่วคราว แล้วจะถูกลบทันทีที่เจ้าของงานได้รับ</li>
+      <li>ทุกครั้งที่เปิดหน้าจอของงาน จะมีการสร้าง QR โค้ดใหม่ และโค้ดเก่าจะใช้ไม่ได้อีก</li>
+    </ul>
+  </div>
+
+  <footer>
+    <a href="privacy.html">นโยบายความเป็นส่วนตัว</a> ·
+    <a href="mailto:mizzking75@gmail.com">ติดต่อ</a> ·
+    <a href="../" lang="ko">한국어</a> · <a href="../en/" lang="en">English</a> · <a href="../zh-hans/" lang="zh-Hans">简体中文</a> · <a href="../zh-hant/" lang="zh-Hant">繁體中文</a> · <a href="../ja/" lang="ja">日本語</a> · <a href="../ru/" lang="ru">Русский</a> · <a href="../es/" lang="es">Español</a> · <a href="../de/" lang="de">Deutsch</a> · <a href="../fr/" lang="fr">Français</a> · <a href="../it/" lang="it">Italiano</a> · <a href="../pt-br/" lang="pt-BR">Português (Brasil)</a> · <a href="../vi/" lang="vi">Tiếng Việt</a> · <a href="../cs/" lang="cs">Čeština</a> · <a href="../da/" lang="da">Dansk</a> · <a href="../el/" lang="el">Ελληνικά</a> · <a href="../fi/" lang="fi">Suomi</a> · <a href="../id/" lang="id">Bahasa Indonesia</a> · <a href="../nb/" lang="nb">Norsk bokmål</a> · <a href="../nl/" lang="nl">Nederlands</a> · <a href="../pl/" lang="pl">Polski</a> · <a href="../sv/" lang="sv">Svenska</a> · <a href="../tr/" lang="tr">Türkçe</a> ·
+    © 2026 Botaejwo
+  </footer>
+</div>
+</body>
+</html>

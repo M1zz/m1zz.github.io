@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Botaejwo — 一個 QR Code，收齊活動照片</title>
+<meta name="description" content="在活動現場出示 QR Code，來賓不必安裝 App 就能傳送照片。原始檔會依拍攝時間存進你的「照片」App。">
+<style>
+  :root { --bg:#F3F6F5; --card:#FFFFFF; --ink:#10323A; --subtle:#5B6F73; --accent:#146070; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0D1A1D; --card:#15262A; --ink:#E8F0EF; --subtle:#9FB2B4; --accent:#6FC6D6; } }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Heiti TC","Noto Sans TC","Microsoft JhengHei",sans-serif; line-height:1.7; }
+  .wrap { max-width:680px; margin:0 auto; padding:48px 20px 80px; }
+  .mark { width:72px; height:72px; border-radius:18px; background:linear-gradient(#14606E, #F08A5D); }
+  h1 { font-size:28px; margin:20px 0 6px; word-break:normal; line-break:strict; }
+  .sub { color:var(--subtle); font-size:16px; margin-bottom:32px; word-break:normal; line-break:strict; }
+  h2 { font-size:19px; color:var(--accent); margin:32px 0 10px; }
+  p, li { font-size:16px; word-break:normal; line-break:strict; }
+  ul { padding-left:20px; }
+  li { margin-bottom:6px; }
+  .card { background:var(--card); border-radius:16px; padding:20px 22px; margin-bottom:8px; box-shadow:0 2px 10px rgba(0,0,0,.04); }
+  .steps { counter-reset:step; list-style:none; padding:0; }
+  .steps li { counter-increment:step; position:relative; padding-left:34px; margin-bottom:12px; }
+  .steps li::before { content:counter(step); position:absolute; left:0; top:2px; width:24px; height:24px; border-radius:12px;
+                      background:var(--accent); color:#fff; font-size:14px; font-weight:700; display:grid; place-items:center; }
+  a { color:var(--accent); }
+  footer { margin-top:48px; font-size:15px; color:var(--subtle); text-align:center; }
+</style>
+<link rel="canonical" href="https://m1zz.github.io/moa/zh-hant/">
+<link rel="alternate" hreflang="ko" href="https://m1zz.github.io/moa/">
+<link rel="alternate" hreflang="en" href="https://m1zz.github.io/moa/en/">
+<link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/moa/zh-hans/">
+<link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/moa/zh-hant/">
+<link rel="alternate" hreflang="ja" href="https://m1zz.github.io/moa/ja/">
+<link rel="alternate" hreflang="ru" href="https://m1zz.github.io/moa/ru/">
+<link rel="alternate" hreflang="es" href="https://m1zz.github.io/moa/es/">
+<link rel="alternate" hreflang="de" href="https://m1zz.github.io/moa/de/">
+<link rel="alternate" hreflang="fr" href="https://m1zz.github.io/moa/fr/">
+<link rel="alternate" hreflang="it" href="https://m1zz.github.io/moa/it/">
+<link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/moa/pt-br/">
+<link rel="alternate" hreflang="th" href="https://m1zz.github.io/moa/th/">
+<link rel="alternate" hreflang="vi" href="https://m1zz.github.io/moa/vi/">
+<link rel="alternate" hreflang="cs" href="https://m1zz.github.io/moa/cs/">
+<link rel="alternate" hreflang="da" href="https://m1zz.github.io/moa/da/">
+<link rel="alternate" hreflang="el" href="https://m1zz.github.io/moa/el/">
+<link rel="alternate" hreflang="fi" href="https://m1zz.github.io/moa/fi/">
+<link rel="alternate" hreflang="id" href="https://m1zz.github.io/moa/id/">
+<link rel="alternate" hreflang="nb" href="https://m1zz.github.io/moa/nb/">
+<link rel="alternate" hreflang="nl" href="https://m1zz.github.io/moa/nl/">
+<link rel="alternate" hreflang="pl" href="https://m1zz.github.io/moa/pl/">
+<link rel="alternate" hreflang="sv" href="https://m1zz.github.io/moa/sv/">
+<link rel="alternate" hreflang="tr" href="https://m1zz.github.io/moa/tr/">
+<link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/moa/">
+</head>
+<body>
+<div class="wrap">
+  <div class="mark" aria-hidden="true"></div>
+  <h1>Botaejwo</h1>
+  <p class="sub">一個 QR Code 收齊所有人的照片：原始檔原封不動，依拍攝時間出現在你的「照片」App 裡。</p>
+
+  <h2>功能簡介</h2>
+  <div class="card">
+    <p>活動結束後，不用再苦等好幾天讓大家把照片傳過來。主辦人出示 QR Code，來賓用相機一掃，當場就能傳送照片。</p>
+  </div>
+
+  <h2>使用方式</h2>
+  <div class="card">
+    <ul class="steps">
+      <li>主辦人在 Botaejwo 中建立活動，並出示活動的 QR Code。</li>
+      <li>來賓用 iPhone 相機掃描。<strong>不必安裝任何 App。</strong>只會短暫開啟一個 App Clip。</li>
+      <li>來賓挑選想傳送的照片和影片。</li>
+      <li>所有內容直接存進主辦人的「照片」App，放在以活動命名的相簿中。</li>
+    </ul>
+  </div>
+
+  <h2>與眾不同之處</h2>
+  <div class="card">
+    <ul>
+      <li><strong>不必安裝。</strong>來賓透過 App Clip 傳送，不需要帳號，也不用登入。</li>
+      <li><strong>原始檔原封不動。</strong>HEIC 照片、原況照片和影片都不會被重新壓縮。</li>
+      <li><strong>各就各位。</strong>收到的照片會排在拍攝日期，而不是今天，與你自己拍的照片自然融為一體。</li>
+      <li><strong>沒有存放照片的伺服器。</strong>在同一個 Wi-Fi 下，照片會直接從來賓的 iPhone 傳到主辦人的 iPhone。</li>
+      <li><strong>誰傳的一目了然。</strong>來賓填上名字後，名字會顯示在他傳送的每張照片上。</li>
+    </ul>
+  </div>
+
+  <h2>注意事項</h2>
+  <div class="card">
+    <ul>
+      <li>主辦人需讓活動畫面保持開啟，才能接收照片。</li>
+      <li>如果照片無法透過 Wi-Fi 直接傳送，會先加密，再經由 iCloud 短暫轉送，主辦人收到後立即刪除。</li>
+      <li>每次開啟活動畫面都會產生新的 QR Code，舊的 QR Code 隨即失效。</li>
+    </ul>
+  </div>
+
+  <footer>
+    <a href="privacy.html">隱私權政策</a> ·
+    <a href="mailto:mizzking75@gmail.com">聯絡我們</a> ·
+    <a href="../" lang="ko">한국어</a> · <a href="../en/" lang="en">English</a> · <a href="../zh-hans/" lang="zh-Hans">简体中文</a> · <a href="../ja/" lang="ja">日本語</a> · <a href="../ru/" lang="ru">Русский</a> · <a href="../es/" lang="es">Español</a> · <a href="../de/" lang="de">Deutsch</a> · <a href="../fr/" lang="fr">Français</a> · <a href="../it/" lang="it">Italiano</a> · <a href="../pt-br/" lang="pt-BR">Português (Brasil)</a> · <a href="../th/" lang="th">ไทย</a> · <a href="../vi/" lang="vi">Tiếng Việt</a> · <a href="../cs/" lang="cs">Čeština</a> · <a href="../da/" lang="da">Dansk</a> · <a href="../el/" lang="el">Ελληνικά</a> · <a href="../fi/" lang="fi">Suomi</a> · <a href="../id/" lang="id">Bahasa Indonesia</a> · <a href="../nb/" lang="nb">Norsk bokmål</a> · <a href="../nl/" lang="nl">Nederlands</a> · <a href="../pl/" lang="pl">Polski</a> · <a href="../sv/" lang="sv">Svenska</a> · <a href="../tr/" lang="tr">Türkçe</a> ·
+    © 2026 Botaejwo
+  </footer>
+</div>
+</body>
+</html>
